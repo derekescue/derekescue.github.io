@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Number Family</title>
+
+  <style>
+    body {
+      font-family: Arial;
+      text-align: center;
+      padding: 40px;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    .problem {
+      font-size: 28px;
+      margin: 10px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 18px;
+      margin-top: 20px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+<h1>Number Family for 12</h1>
+
+<div id="problems"></div>
+
+<button onclick="generateFamily()">
+  New Number Family
+</button>
+
+<br><br>
+
+<a href="index.html">Back Home</a>
+
+<script>
+function generateFamily() {
+
+  const total = Math.floor(Math.random() * 11) + 5;
+
+  let html = `<h2>Total: ${total}</h2>`;
+
+  for(let i = total; i >= 0; i--) {
+
+    let other = total - i;
+
+    html += `
+      <div class="problem">
+        ${i} + ${other} = ${total}
+      </div>
+    `;
+  }
+
+  document.getElementById("problems").innerHTML = html;
+}
+
+generateFamily();
+</script>
+
+</body>
+</html>
