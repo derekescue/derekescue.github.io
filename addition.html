@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>Addition Practice</h1>
+
+<p id="problem"></p>
+
+<input id="answer">
+<button onclick="check()">Check</button>
+
+<p id="result"></p>
+
+<script>
+let a = Math.floor(Math.random() * 10);
+let b = Math.floor(Math.random() * 10);
+
+document.getElementById("problem").innerText =
+  `${a} + ${b} = ?`;
+
+function check() {
+  let user = parseInt(document.getElementById("answer").value);
+
+  if (user === a + b)
+    document.getElementById("result").innerText = "Correct!";
+  else
+    document.getElementById("result").innerText = "Try again";
+}
+</script>
+
+<br><br>
+<a href="index.html">Back Home</a>
+
+</body>
+</html>
