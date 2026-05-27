@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Shapes</title>
+
+  <style>
+
+    body {
+      font-family: Arial;
+      text-align: center;
+      padding: 40px;
+    }
+
+    h1 {
+      margin-bottom: 40px;
+    }
+
+    .shape-container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 40px;
+    }
+
+    .shape-box {
+      cursor: pointer;
+    }
+
+    .label {
+      margin-top: 10px;
+      font-size: 24px;
+    }
+
+    .circle {
+      width: 120px;
+      height: 120px;
+      background: red;
+      border-radius: 50%;
+    }
+
+    .square {
+      width: 120px;
+      height: 120px;
+      background: blue;
+    }
+
+    .rectangle {
+      width: 180px;
+      height: 100px;
+      background: green;
+    }
+
+    .triangle {
+      width: 0;
+      height: 0;
+      border-left: 60px solid transparent;
+      border-right: 60px solid transparent;
+      border-bottom: 120px solid orange;
+    }
+
+  </style>
+</head>
+
+<body>
+
+<h1>Learn Shapes</h1>
+
+<p>Click a shape to hear its name!</p>
+
+<div class="shape-container">
+
+  <div class="shape-box" onclick="speak('Circle')">
+    <div class="circle"></div>
+    <div class="label">Circle</div>
+  </div>
+
+  <div class="shape-box" onclick="speak('Square')">
+    <div class="square"></div>
+    <div class="label">Square</div>
+  </div>
+
+  <div class="shape-box" onclick="speak('Rectangle')">
+    <div class="rectangle"></div>
+    <div class="label">Rectangle</div>
+  </div>
+
+  <div class="shape-box" onclick="speak('Triangle')">
+    <div class="triangle"></div>
+    <div class="label">Triangle</div>
+  </div>
+
+</div>
+
+<br><br>
+
+<a href="index.html">Back Home</a>
+
+<script>
+
+function speak(text) {
+
+  const speech = new SpeechSynthesisUtterance(text);
+
+  speech.rate = 0.9;
+
+  window.speechSynthesis.speak(speech);
+}
+
+</script>
+
+</body>
+</html>
