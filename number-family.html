@@ -19,10 +19,17 @@
       margin: 10px;
     }
 
+    input {
+      padding: 10px;
+      font-size: 20px;
+      width: 120px;
+      text-align: center;
+    }
+
     button {
       padding: 10px 20px;
       font-size: 18px;
-      margin-top: 20px;
+      margin: 10px;
       cursor: pointer;
     }
   </style>
@@ -30,24 +37,33 @@
 
 <body>
 
-<h1>Number Family for 12</h1>
+<h1>Number Family Generator</h1>
 
-<div id="problems"></div>
+<p>Enter a number:</p>
 
-<button onclick="generateFamily()">
-  New Number Family
+<input id="totalInput" type="number" value="12">
+
+<br>
+
+<button onclick="generateCustomFamily()">
+  Generate Number Family
 </button>
+
+<button onclick="generateRandomFamily()">
+  Random Number Family
+</button>
+
+<div id="problems" style="margin-top: 30px;"></div>
 
 <br><br>
 
 <a href="index.html">Back Home</a>
 
 <script>
-function generateFamily() {
 
-  const total = Math.floor(Math.random() * 11) + 5;
+function showFamily(total) {
 
-  let html = `<h2>Total: ${total}</h2>`;
+  let html = `<h2>Number Family for ${total}</h2>`;
 
   for(let i = total; i >= 0; i--) {
 
@@ -63,7 +79,28 @@ function generateFamily() {
   document.getElementById("problems").innerHTML = html;
 }
 
-generateFamily();
+function generateCustomFamily() {
+
+  const total = parseInt(
+    document.getElementById("totalInput").value
+  );
+
+  showFamily(total);
+}
+
+function generateRandomFamily() {
+
+  const total =
+    Math.floor(Math.random() * 16) + 5;
+
+  document.getElementById("totalInput").value =
+    total;
+
+  showFamily(total);
+}
+
+generateRandomFamily();
+
 </script>
 
 </body>
