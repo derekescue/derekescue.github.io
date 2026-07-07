@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -53,10 +53,16 @@
             <button class="btn btn-success btn-lg" onclick="checkAnswer()">
               Check Answer
             </button>
-            <button class="btn btn-outline-secondary btn-lg" onclick="revealAnswer()">
+            <button
+              class="btn btn-outline-secondary btn-lg"
+              onclick="revealAnswer()"
+            >
               Reveal Answer
             </button>
-            <button class="btn btn-outline-primary btn-lg" onclick="nextQuestion()">
+            <button
+              class="btn btn-outline-primary btn-lg"
+              onclick="nextQuestion()"
+            >
               New Question
             </button>
           </div>
@@ -73,10 +79,13 @@
         { question: "Who was swallowed by a big fish?", answer: "Jonah" },
         { question: "What did God create on the first day?", answer: "Light" },
         { question: "Who was Jesus' mother?", answer: "Mary" },
-        { question: "How many days did it rain during the flood?", answer: "Forty" },
+        {
+          question: "How many days did it rain during the flood?",
+          answer: "Forty",
+        },
         { question: "What is the first book of the Bible?", answer: "Genesis" },
         { question: "Who led the Israelites out of Egypt?", answer: "Moses" },
-        { question: "What gift did the wise men bring?", answer: "Gold" }
+        { question: "What gift did the wise men bring?", answer: "Gold" },
       ];
 
       let current = null;

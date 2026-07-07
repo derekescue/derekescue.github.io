@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -41,9 +41,16 @@
       <div class="card shadow-lg app-card mx-auto border-0">
         <div class="card-body p-4 p-sm-5 text-center">
           <h1 class="fw-bold mb-3">Rounding Practice</h1>
-          <p class="mb-2">Round the number below to the selected place value.</p>
+          <p class="mb-2">
+            Round the number below to the selected place value.
+          </p>
           <div class="mb-4">
-            <select id="place" class="form-select form-select-lg mx-auto" style="max-width: 260px" onchange="nextProblem()">
+            <select
+              id="place"
+              class="form-select form-select-lg mx-auto"
+              style="max-width: 260px"
+              onchange="nextProblem()"
+            >
               <option value="10">Nearest ten</option>
               <option value="100">Nearest hundred</option>
               <option value="1000">Nearest thousand</option>
@@ -61,12 +68,26 @@
             />
           </div>
           <div class="d-grid gap-2 mb-3">
-            <button class="btn btn-success btn-lg" onclick="check()">Check Answer</button>
-            <button class="btn btn-outline-secondary btn-lg" onclick="revealAnswer()">Reveal Answer</button>
-            <button class="btn btn-outline-primary btn-lg" onclick="nextProblem()">New Problem</button>
+            <button class="btn btn-success btn-lg" onclick="check()">
+              Check Answer
+            </button>
+            <button
+              class="btn btn-outline-secondary btn-lg"
+              onclick="revealAnswer()"
+            >
+              Reveal Answer
+            </button>
+            <button
+              class="btn btn-outline-primary btn-lg"
+              onclick="nextProblem()"
+            >
+              New Problem
+            </button>
           </div>
           <p id="result" class="fs-5 mb-3"></p>
-          <div class="keypad d-flex flex-wrap justify-content-center gap-2 mb-4">
+          <div
+            class="keypad d-flex flex-wrap justify-content-center gap-2 mb-4"
+          >
             <button class="btn btn-light" onclick="appendDigit('1')">1</button>
             <button class="btn btn-light" onclick="appendDigit('2')">2</button>
             <button class="btn btn-light" onclick="appendDigit('3')">3</button>
@@ -76,9 +97,16 @@
             <button class="btn btn-light" onclick="appendDigit('7')">7</button>
             <button class="btn btn-light" onclick="appendDigit('8')">8</button>
             <button class="btn btn-light" onclick="appendDigit('9')">9</button>
-            <button class="btn btn-secondary text-white" onclick="clearAnswer()">Clear</button>
+            <button
+              class="btn btn-secondary text-white"
+              onclick="clearAnswer()"
+            >
+              Clear
+            </button>
             <button class="btn btn-light" onclick="appendDigit('0')">0</button>
-            <button class="btn btn-danger text-white" onclick="backspace()">⌫</button>
+            <button class="btn btn-danger text-white" onclick="backspace()">
+              ⌫
+            </button>
           </div>
           <a class="btn btn-link" href="index.html">Back Home</a>
         </div>
@@ -88,60 +116,60 @@
       let value = 0;
       let placeValue = 10;
       function setProblem() {
-        placeValue = parseInt(document.getElementById('place').value, 10);
+        placeValue = parseInt(document.getElementById("place").value, 10);
         const max = placeValue === 1000 ? 9999 : 999;
         const min = placeValue === 1000 ? 1000 : 100;
         value = Math.floor(Math.random() * (max - min + 1)) + min;
-        document.getElementById('problem').innerText = `${value}`;
-        document.getElementById('answer').value = '';
-        document.getElementById('result').innerText = '';
+        document.getElementById("problem").innerText = `${value}`;
+        document.getElementById("answer").value = "";
+        document.getElementById("result").innerText = "";
       }
       function roundTo(value, place) {
         return Math.round(value / place) * place;
       }
       function check() {
-        const answerText = document.getElementById('answer').value.trim();
-        if (answerText === '') {
-          showResult('Type your answer first!', false);
+        const answerText = document.getElementById("answer").value.trim();
+        if (answerText === "") {
+          showResult("Type your answer first!", false);
           return;
         }
         const user = parseInt(answerText, 10);
         if (!Number.isFinite(user)) {
-          showResult('Please use numbers only.', false);
+          showResult("Please use numbers only.", false);
           return;
         }
         const correct = roundTo(value, placeValue);
         if (user === correct) {
-          showResult('Correct! Great job!', true);
+          showResult("Correct! Great job!", true);
         } else {
           showResult(`Try again! The correct answer is ${correct}.`, false);
         }
       }
       function showResult(message, good) {
-        const result = document.getElementById('result');
+        const result = document.getElementById("result");
         result.innerText = message;
-        result.className = good ? 'fs-5 result-ok' : 'fs-5 result-bad';
+        result.className = good ? "fs-5 result-ok" : "fs-5 result-bad";
       }
       function nextProblem() {
         setProblem();
-        document.getElementById('answer').focus();
+        document.getElementById("answer").focus();
       }
       function appendDigit(digit) {
-        const input = document.getElementById('answer');
+        const input = document.getElementById("answer");
         input.value = input.value + digit;
         input.focus();
       }
       function clearAnswer() {
-        document.getElementById('answer').value = '';
-        document.getElementById('answer').focus();
+        document.getElementById("answer").value = "";
+        document.getElementById("answer").focus();
       }
       function revealAnswer() {
         const correct = roundTo(value, placeValue);
-        document.getElementById('answer').value = correct;
+        document.getElementById("answer").value = correct;
         showResult(`The answer is ${correct}.`, true);
       }
       function backspace() {
-        const input = document.getElementById('answer');
+        const input = document.getElementById("answer");
         input.value = input.value.slice(0, -1);
         input.focus();
       }

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -165,7 +165,7 @@
         if (Math.abs(parsed - currentTotal) < 0.01) {
           message.className = "text-success fs-5 mb-4";
           message.innerText = `Correct! The total is $${formatMoney(
-            currentTotal
+            currentTotal,
           )}.`;
           setTimeout(() => {
             newProblem();
