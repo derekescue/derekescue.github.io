@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Spelling Practice</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        min-height: 100vh;
+        background: linear-gradient(135deg, #fff4e6, #e6f4ff);
+      }
+      .app-card {
+        max-width: 560px;
+        border-radius: 24px;
+      }
+      #answer {
+        font-size: 1.4rem;
+        text-align: center;
+      }
+      .result-ok {
+        color: #0f5132;
+      }
+      .result-bad {
+        color: #842029;
+      }
+    </style>
+  </head>
+  <body class="d-flex align-items-center justify-content-center py-5">
+    <div class="container px-3">
+      <div class="card shadow-lg app-card mx-auto border-0">
+        <div class="card-body p-4 p-sm-5 text-center">
+          <h1 class="fw-bold mb-3">Spelling Practice</h1>
+          <p class="mb-3">Spell the word that matches the clue below.</p>
+          <div class="mb-4">
+            <div class="card border-0 shadow-sm p-4 bg-white">
+              <p class="mb-2 text-muted">Clue</p>
+              <p id="clue" class="h4 fw-semibold mb-0"></p>
+            </div>
+          </div>
+          <div class="mb-4">
+            <input
+              id="answer"
+              type="text"
+              class="form-control form-control-lg mx-auto"
+              style="max-width: 320px"
+              placeholder="Type the word"
+              aria-label="Spelling answer"
+            />
+          </div>
+          <div class="d-grid gap-2 mb-3">
+            <button class="btn btn-success btn-lg" onclick="checkSpelling()">
+              Check Spelling
+            </button>
+            <button
+              class="btn btn-outline-secondary btn-lg"
+              onclick="revealSpelling()"
+            >
+              Reveal Word
+            </button>
+            <button class="btn btn-outline-primary btn-lg" onclick="nextWord()">
+              New Word
+            </button>
+          </div>
+          <p id="result" class="fs-5 mb-3"></p>
+          <a class="btn btn-link" href="index.html">Back Home</a>
+        </div>
+      </div>
+    </div>
+    <script>
+      const words = [
+        { word: "apple", clue: "A sweet fruit that is often red or green." },
+        { word: "house", clue: "A place where people live." },
+        { word: "school", clue: "A place where kids go to learn." },
+        { word: "family", clue: "A group of people related by blood or love." },
+        { word: "friend", clue: "Someone you like spending time with." },
+        { word: "purple", clue: "A color made from red and blue." },
+        { word: "orange", clue: "A fruit and also a bright fall color." },
+        { word: "Sunday", clue: "The Lord's Day." },
+        { word: "summer", clue: "The warm season with sunshine and vacation." },
+        { word: "winter", clue: "The cold season when it may snow." },
+      ];
+
+      let current = null;
+
+      function randomWord() {
+        return words[Math.floor(Math.random() * words.length)];
+      }
+
+      function setWord() {
+        current = randomWord();
+        document.getElementById("clue").innerText = current.clue;
+        document.getElementById("answer").value = "";
+        document.getElementById("result").innerText = "";
+      }
+
+      function checkSpelling() {
+        const answer = document.getElementById("answer").value.trim();
+        if (answer === "") {
+          showResult("Type your answer first!", false);
+          return;
+        }
+        if (answer.toLowerCase() === current.word.toLowerCase()) {
+          showResult("Correct! Great spelling!", true);
+        } else {
+          showResult("Try again!", false);
+        }
+      }
+
+      function revealSpelling() {
+        document.getElementById("answer").value = current.word;
+        showResult(`The word is ${current.word}.`, true);
+      }
+
+      function nextWord() {
+        setWord();
+        document.getElementById("answer").focus();
+      }
+
+      function showResult(message, good) {
+        const result = document.getElementById("result");
+        result.innerText = message;
+        result.className = good ? "fs-5 result-ok" : "fs-5 result-bad";
+      }
+
+      setWord();
+    </script>
+  </body>
+</html>

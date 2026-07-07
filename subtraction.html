@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Addition Practice</title>
+    <title>Subtraction Practice</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -11,10 +11,10 @@
     <style>
       body {
         min-height: 100vh;
-        background: linear-gradient(135deg, #fff7d9, #ffe1f0);
+        background: linear-gradient(135deg, #e7f9f0, #fff4d6);
       }
       .app-card {
-        max-width: 520px;
+        max-width: 540px;
         border-radius: 24px;
       }
       #answer {
@@ -40,7 +40,7 @@
     <div class="container px-3">
       <div class="card shadow-lg app-card mx-auto border-0">
         <div class="card-body p-4 p-sm-5 text-center">
-          <h1 class="fw-bold mb-3">Addition Practice</h1>
+          <h1 class="fw-bold mb-3">Subtraction Practice</h1>
           <p id="problem" class="display-6 fw-semibold mb-4"></p>
 
           <div class="mb-4">
@@ -108,9 +108,9 @@
       let b = 0;
 
       function setProblem() {
-        a = Math.floor(Math.random() * 10);
-        b = Math.floor(Math.random() * 10);
-        document.getElementById("problem").innerText = `${a} + ${b} = ?`;
+        a = Math.floor(Math.random() * 12) + 1;
+        b = Math.floor(Math.random() * a) + 1;
+        document.getElementById("problem").innerText = `${a} − ${b} = ?`;
         document.getElementById("answer").value = "";
         document.getElementById("result").innerText = "";
       }
@@ -128,7 +128,7 @@
           return;
         }
 
-        if (user === a + b) {
+        if (user === a - b) {
           showResult("Correct! Great job!", true);
         } else {
           showResult("Try again!", false);
@@ -158,7 +158,7 @@
       }
 
       function revealAnswer() {
-        const correct = a + b;
+        const correct = a - b;
         document.getElementById("answer").value = correct;
         showResult(`The answer is ${correct}.`, true);
       }
