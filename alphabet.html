@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alphabet Practice</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        min-height: 100vh;
+        background: linear-gradient(135deg, #fff9e6, #e8f4ff);
+      }
+      .app-card {
+        max-width: 520px;
+        border-radius: 24px;
+      }
+      #answer {
+        font-size: 1.4rem;
+        text-align: center;
+      }
+      .letter-box {
+        font-size: 4rem;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+      }
+      .result-ok {
+        color: #0f5132;
+      }
+      .result-bad {
+        color: #842029;
+      }
+    </style>
+  </head>
+  <body class="d-flex align-items-center justify-content-center py-5">
+    <div class="container px-3">
+      <div class="card shadow-lg app-card mx-auto border-0">
+        <div class="card-body p-4 p-sm-5 text-center">
+          <h1 class="fw-bold mb-3">Alphabet Practice</h1>
+          <p class="mb-3">Type the letter that comes next in the alphabet.</p>
+
+          <div class="card border-0 shadow-sm p-4 mb-4 bg-white">
+            <p class="text-muted mb-1">Current letter</p>
+            <div id="letter" class="letter-box">A</div>
+          </div>
+
+          <div class="mb-4">
+            <input
+              id="answer"
+              type="text"
+              class="form-control form-control-lg mx-auto text-center"
+              style="max-width: 220px"
+              placeholder="Type next letter"
+              aria-label="Next alphabet letter"
+              maxlength="1"
+              onkeydown="if (event.key === 'Enter') checkAnswer()"
+            />
+          </div>
+
+          <div class="d-grid gap-2 mb-3">
+            <button class="btn btn-success btn-lg" onclick="checkAnswer()">
+              Check Answer
+            </button>
+            <button class="btn btn-outline-primary btn-lg" onclick="nextLetter()">
+              New Letter
+            </button>
+            <button class="btn btn-outline-secondary btn-lg" onclick="showAlphabet()">
+              Show Alphabet
+            </button>
+          </div>
+
+          <p id="result" class="fs-5 mb-3"></p>
+          <div id="alphabetList" class="text-muted mb-3" style="font-size: 1.05rem; word-break: break-word;"></div>
+          <a class="btn btn-link" href="index.html">Back Home</a>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+      let currentIndex = 0;
+
+      function randomLetter() {
+        currentIndex = Math.floor(Math.random() * (alphabet.length - 1));
+        document.getElementById("letter").innerText = alphabet[currentIndex];
+        document.getElementById("answer").value = "";
+        document.getElementById("result").innerText = "";
+      }
+
+      function checkAnswer() {
+        const answer = document.getElementById("answer").value.trim().toUpperCase();
+        if (!answer) {
+          showResult("Type a letter first!", false);
+          return;
+        }
+        if (answer.length !== 1 || !/[A-Z]/.test(answer)) {
+          showResult("Please type a single letter A–Z.", false);
+          return;
+        }
+        const correct = alphabet[currentIndex + 1];
+        if (answer === correct) {
+          showResult("Correct! Great job!", true);
+        } else {
+          showResult(`Try again. The next letter is ${correct}.`, false);
+        }
+      }
+
+      function nextLetter() {
+        randomLetter();
+        document.getElementById("answer").focus();
+      }
+
+      function showResult(message, good) {
+        const result = document.getElementById("result");
+        result.innerText = message;
+        result.className = good ? "fs-5 result-ok" : "fs-5 result-bad";
+      }
+
+      function showAlphabet() {
+        document.getElementById("alphabetList").innerText = alphabet.join(" ");
+      }
+
+      randomLetter();
+    </script>
+  </body>
+</html>

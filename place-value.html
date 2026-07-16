@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Place Value Practice</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        min-height: 100vh;
+        background: linear-gradient(135deg, #e7f5ff, #f7fbff);
+      }
+      .app-card {
+        max-width: 560px;
+        border-radius: 24px;
+      }
+      .question-box {
+        min-height: 140px;
+      }
+      .result-ok {
+        color: #0f5132;
+      }
+      .result-bad {
+        color: #842029;
+      }
+      .keypad button {
+        min-width: 72px;
+        min-height: 72px;
+        font-size: 1.3rem;
+        border-radius: 18px;
+      }
+      .place-digit {
+        font-size: 2.25rem;
+        letter-spacing: 0.08em;
+      }
+      .place-digit span {
+        display: inline-block;
+        min-width: 1.5rem;
+      }
+      .underline {
+        text-decoration: underline;
+        text-decoration-thickness: 3px;
+      }
+    </style>
+  </head>
+  <body class="d-flex align-items-center justify-content-center py-5">
+    <div class="container px-3">
+      <div class="card shadow-lg app-card mx-auto border-0">
+        <div class="card-body p-4 p-sm-5 text-center">
+          <h1 class="fw-bold mb-3">Place Value Practice</h1>
+          <p class="text-muted mb-4">
+            Identify the value of the underlined digit in each number.
+          </p>
+
+          <div class="card p-3 mb-4 question-box">
+            <p class="mb-2 text-muted">What is the value of the underlined digit?</p>
+            <p id="problem" class="place-digit fw-semibold mb-2"></p>
+            <p id="placeLabel" class="text-muted mb-0"></p>
+          </div>
+
+          <div class="mb-4">
+            <input
+              id="answer"
+              type="text"
+              inputmode="numeric"
+              class="form-control form-control-lg mx-auto"
+              style="max-width: 220px"
+              aria-label="Answer input"
+            />
+          </div>
+
+          <div class="d-grid gap-2 mb-3">
+            <button class="btn btn-success btn-lg" onclick="check()">
+              Check Answer
+            </button>
+            <button class="btn btn-outline-secondary btn-lg" onclick="revealAnswer()">
+              Reveal Answer
+            </button>
+            <button class="btn btn-outline-primary btn-lg" onclick="nextProblem()">
+              New Problem
+            </button>
+          </div>
+
+          <p id="result" class="fs-5 mb-3"></p>
+
+          <div class="keypad d-flex flex-wrap justify-content-center gap-2 mb-4">
+            <button class="btn btn-light" onclick="appendDigit('1')">1</button>
+            <button class="btn btn-light" onclick="appendDigit('2')">2</button>
+            <button class="btn btn-light" onclick="appendDigit('3')">3</button>
+            <button class="btn btn-light" onclick="appendDigit('4')">4</button>
+            <button class="btn btn-light" onclick="appendDigit('5')">5</button>
+            <button class="btn btn-light" onclick="appendDigit('6')">6</button>
+            <button class="btn btn-light" onclick="appendDigit('7')">7</button>
+            <button class="btn btn-light" onclick="appendDigit('8')">8</button>
+            <button class="btn btn-light" onclick="appendDigit('9')">9</button>
+            <button class="btn btn-secondary text-white" onclick="clearAnswer()">Clear</button>
+            <button class="btn btn-light" onclick="appendDigit('0')">0</button>
+            <button class="btn btn-danger text-white" onclick="backspace()">⌫</button>
+          </div>
+
+          <a class="btn btn-link" href="index.html">Back Home</a>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      let currentValue = 0;
+      let currentPlace = "";
+      let currentAnswer = 0;
+
+      const placeNames = [
+        { name: "ones", value: 1 },
+        { name: "tens", value: 10 },
+        { name: "hundreds", value: 100 }
+      ];
+
+      function setProblem() {
+        const number = Math.floor(Math.random() * 900) + 100;
+        const digits = String(number).split("");
+        const placeIndex = Math.floor(Math.random() * placeNames.length);
+        const selectedPlace = placeNames[placeIndex];
+
+        currentValue = number;
+        currentPlace = selectedPlace.name;
+        currentAnswer = Math.floor(number / selectedPlace.value) % 10 * selectedPlace.value;
+
+        const highlighted = digits
+          .map((digit, index) => {
+            const position = digits.length - index;
+            const placeWord = position === 1 ? "ones" : position === 2 ? "tens" : "hundreds";
+            if (placeWord === currentPlace) {
+              return `<span class="underline">${digit}</span>`;
+            }
+            return `<span>${digit}</span>`;
+          })
+          .join(" ");
+
+        document.getElementById("problem").innerHTML = highlighted;
+        document.getElementById("placeLabel").innerText = `The underlined digit is in the ${currentPlace} place.`;
+        document.getElementById("answer").value = "";
+        document.getElementById("result").innerText = "";
+      }
+
+      function check() {
+        const answerText = document.getElementById("answer").value.trim();
+        if (answerText === "") {
+          showResult("Type your answer first!", false);
+          return;
+        }
+
+        const user = parseInt(answerText, 10);
+        if (!Number.isFinite(user)) {
+          showResult("Please use numbers only.", false);
+          return;
+        }
+
+        if (user === currentAnswer) {
+          showResult("Correct! Great job!", true);
+        } else {
+          showResult(`Try again. The right answer is ${currentAnswer}.`, false);
+        }
+      }
+
+      function revealAnswer() {
+        document.getElementById("answer").value = currentAnswer;
+        showResult(`The answer is ${currentAnswer}.`, true);
+      }
+
+      function nextProblem() {
+        setProblem();
+        document.getElementById("answer").focus();
+      }
+
+      function appendDigit(digit) {
+        const input = document.getElementById("answer");
+        input.value = input.value + digit;
+        input.focus();
+      }
+
+      function clearAnswer() {
+        const answer = document.getElementById("answer");
+        answer.value = "";
+        answer.focus();
+      }
+
+      function backspace() {
+        const input = document.getElementById("answer");
+        input.value = input.value.slice(0, -1);
+        input.focus();
+      }
+
+      function showResult(message, good) {
+        const result = document.getElementById("result");
+        result.innerText = message;
+        result.className = good ? "fs-5 result-ok" : "fs-5 result-bad";
+      }
+
+      setProblem();
+    </script>
+  </body>
+</html>

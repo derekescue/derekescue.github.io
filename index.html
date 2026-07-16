@@ -14,98 +14,178 @@
         background: linear-gradient(135deg, #ffd8d8, #fff5da);
       }
       .hero {
-        max-width: 1000px;
-        border-radius: 20px;
+        max-width: 1040px;
+        border-radius: 24px;
+      }
+      .section-card {
+        min-height: 340px;
+      }
+      .intro-text {
+        max-width: 760px;
+      }
+      .category-label {
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        font-size: 0.8rem;
       }
       .nav-card a,
       .nav-card button {
-        min-width: 220px;
+        min-width: 100%;
       }
     </style>
   </head>
-  <body class="d-flex align-items-center justify-content-center py-5">
+  <body class="py-5">
     <div class="container px-3">
       <div class="card hero shadow-lg border-0">
         <div class="card-body p-5">
-          <h1 class="display-5 fw-bold mb-4 text-center">Kids School</h1>
-          <div class="row g-4">
-            <div class="col-12 col-lg-6">
-              <div class="card h-100 border-0 shadow-sm">
-                <div class="card-body">
-                  <h2 class="h4 fw-semibold mb-3">Math</h2>
-                  <div class="d-grid gap-3">
-                    <a
-                      class="btn btn-primary btn-lg nav-card"
-                      href="addition.html"
-                      >Addition Practice</a
-                    >
-                    <a
-                      class="btn btn-warning btn-lg nav-card"
-                      href="subtraction.html"
-                      >Subtraction Practice</a
-                    >
+          <div class="text-center mb-4">
+            <p class="category-label text-primary mb-2">Learn &amp; Practice</p>
+            <h1 class="display-5 fw-bold mb-3">Kids School</h1>
+            <p class="intro-text text-muted mx-auto">
+              A friendly learning hub for math, spelling, and Bible practice.
+              Choose a lesson and start practicing with bright, easy-to-use
+              pages.
+            </p>
+          </div>
 
-                    <a
-                      class="btn btn-success btn-lg nav-card"
-                      href="number-family.html"
-                      >Number Family</a
-                    >
-                    <a
-                      class="btn btn-info btn-lg nav-card"
-                      href="expanded-number-form.html"
-                      >Expanded Number Form</a
-                    >
-                    <a
-                      class="btn btn-primary btn-lg nav-card"
-                      href="rounding.html"
-                      >Rounding Practice</a
-                    >
-                    <a
-                      class="btn btn-warning btn-lg nav-card"
-                      href="shapes.html"
-                      >Shapes</a
-                    >
-                    <a
-                      class="btn btn-info btn-lg nav-card text-white"
-                      href="money-identifying.html"
-                      >Money Identifying</a
-                    >
-                    <a
-                      class="btn btn-secondary btn-lg nav-card"
-                      href="money-counting.html"
-                      >Money Counting</a
-                    >
-                    <a
-                      class="btn btn-danger btn-lg nav-card"
-                      href="multiplication.html"
-                      >Multiplication Practice</a
-                    >
+          <div class="row g-4">
+            <div class="col-12 col-xl-6">
+              <div class="card section-card h-100 border-0 shadow-sm">
+                <div class="card-body p-4">
+                  <div
+                    class="d-flex align-items-center justify-content-between mb-4"
+                  >
+                    <div>
+                      <h2 class="h4 fw-semibold mb-1">Math</h2>
+                      <p class="text-muted mb-0">
+                        Practice addition, subtraction, numbers, money, and
+                        more.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="row g-3 row-cols-1 row-cols-md-2">
+                    <div class="col">
+                      <a
+                        class="btn btn-primary btn-lg nav-card"
+                        href="addition.html"
+                        >Addition Practice</a
+                      >
+                    </div>
+                    <div class="col">
+                      <a
+                        class="btn btn-info btn-lg nav-card"
+                        href="colors.html"
+                        >Colors Practice</a
+                      >
+                    </div>
+                    <div class="col">
+                      <a
+                        class="btn btn-info btn-lg nav-card text-white"
+                        href="expanded-number-form.html"
+                        >Expanded Number Form</a
+                      >
+                    </div>
+                    <div class="col">
+                      <a
+                        class="btn btn-warning btn-lg nav-card"
+                        href="fractions.html"
+                        >Fractions Practice</a
+                      >
+                    </div>
+                    <div class="col">
+                      <a
+                        class="btn btn-secondary btn-lg nav-card"
+                        href="money-counting.html"
+                        >Money Counting</a
+                      >
+                    </div>
+                    <div class="col">
+                      <a
+                        class="btn btn-info btn-lg nav-card text-white"
+                        href="money-identifying.html"
+                        >Money Identifying</a
+                      >
+                    </div>
+                    <div class="col">
+                      <a
+                        class="btn btn-danger btn-lg nav-card"
+                        href="multiplication.html"
+                        >Multiplication Practice</a
+                      >
+                    </div>
+                    <div class="col">
+                      <a
+                        class="btn btn-success btn-lg nav-card"
+                        href="number-family.html"
+                        >Number Family</a
+                      >
+                    </div>
+                    <div class="col">
+                      <a
+                        class="btn btn-success btn-lg nav-card"
+                        href="numbers.html"
+                        >Number Practice</a
+                      >
+                    </div>
+                    <div class="col">
+                      <a
+                        class="btn btn-secondary btn-lg nav-card"
+                        href="place-value.html"
+                        >Place Value Practice</a
+                      >
+                    </div>
+                    <div class="col">
+                      <a
+                        class="btn btn-primary btn-lg nav-card"
+                        href="rounding.html"
+                        >Rounding Practice</a
+                      >
+                    </div>
+                    <div class="col">
+                      <a
+                        class="btn btn-warning btn-lg nav-card"
+                        href="shapes.html"
+                        >Shapes</a
+                      >
+                    </div>
+                    <div class="col">
+                      <a
+                        class="btn btn-warning btn-lg nav-card"
+                        href="subtraction.html"
+                        >Subtraction Practice</a
+                      >
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="col-12 col-lg-6">
-              <div class="card h-100 border-0 shadow-sm">
-                <div
-                  class="card-body d-flex flex-column justify-content-center align-items-center"
-                >
-                  <h2 class="h4 fw-semibold mb-3">Spelling</h2>
-                  <p class="mb-4 text-center">
-                    Practice spelling words with fun clues and a check button.
-                  </p>
-                  <div
-                    class="d-grid gap-3"
-                    style="width: 100%; max-width: 260px"
-                  >
+
+            <div class="col-12 col-xl-6">
+              <div class="card section-card h-100 border-0 shadow-sm">
+                <div class="card-body p-4">
+                  <div>
+                    <h2 class="h4 fw-semibold mb-1">Spelling &amp; Bible</h2>
+                    <p class="text-muted mb-4">
+                      Fun spelling checks, Bible questions, and simple reading
+                      practice.
+                    </p>
+                  </div>
+
+                  <div class="d-grid gap-3">
+                    <a
+                      class="btn btn-success btn-lg nav-card"
+                      href="alphabet.html"
+                      >Alphabet Practice</a
+                    >
+                    <a class="btn btn-info btn-lg nav-card" href="bible.html"
+                      >Bible Questions</a
+                    >
                     <a
                       class="btn btn-primary btn-lg nav-card"
                       href="spelling.html"
+                      >Spelling Practice</a
                     >
-                      Spelling Practice
-                    </a>
-                    <a class="btn btn-info btn-lg nav-card" href="bible.html">
-                      Bible Questions
-                    </a>
                   </div>
                 </div>
               </div>

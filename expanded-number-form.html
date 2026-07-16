@@ -29,24 +29,29 @@
         <div class="card-body p-4 p-sm-5 text-center">
           <h1 class="fw-bold mb-3">Expanded Number Form</h1>
           <p class="mb-4">
-            Type a number and see how it breaks apart into place values.
+            Type a number or an expanded form expression to convert between them.
           </p>
 
           <div class="row g-3 justify-content-center mb-4">
             <div class="col-12 col-sm-7">
-              <label class="form-label fw-semibold">Enter a number</label>
+              <label class="form-label fw-semibold">Enter a number or expanded form</label>
               <input
                 id="numberInput"
-                type="number"
-                min="0"
-                step="1"
+                type="text"
                 class="form-control form-control-lg text-center"
                 value=""
-                placeholder="Pick a number"
-                aria-label="Number to expand"
+                placeholder="e.g. 123 or 100 + 20 + 3"
+                aria-label="Number or expanded form"
+                onkeydown="if (event.key === 'Enter') convertInput()"
               />
             </div>
             <div class="col-12 col-sm-5 d-grid gap-2">
+              <button
+                class="btn btn-success btn-lg"
+                onclick="convertInput()"
+              >
+                Convert
+              </button>
               <button
                 class="btn btn-outline-secondary btn-lg"
                 onclick="setRandomNumber()"
@@ -155,27 +160,63 @@
       function setRandomNumber() {
         const randomNumber = Math.floor(Math.random() * 1000) + 1;
         document.getElementById("numberInput").value = randomNumber;
-        showExpandedForm();
+        convertInput();
       }
 
-      function showExpandedForm() {
+      function parseExpandedForm(input) {
+        const terms = input
+          .split("+")
+          .map((term) => term.replace(/,/g, "").trim())
+          .filter(Boolean);
+
+        if (terms.length === 0) {
+          return null;
+        }
+
+        let total = 0;
+        for (const term of terms) {
+          if (!/^\d+$/.test(term)) {
+            return null;
+          }
+          total += parseInt(term, 10);
+        }
+        return total;
+      }
+
+      function convertInput() {
         const input = document.getElementById("numberInput").value.trim();
         const result = document.getElementById("result");
 
-        if (!/^\d+$/.test(input)) {
+        if (input === "") {
           result.innerHTML =
-            '<div class="alert alert-warning mb-0">Please enter a whole number.</div>';
+            '<div class="alert alert-warning mb-0">Please enter a number or expanded form.</div>';
           return;
         }
 
-        const number = parseInt(input, 10);
+        if (/^\d+$/.test(input)) {
+          const number = parseInt(input, 10);
+          showExpandedForm(number);
+          return;
+        }
+
+        const parsed = parseExpandedForm(input);
+        if (parsed !== null) {
+          showExpandedForm(parsed, input);
+          return;
+        }
+
+        result.innerHTML =
+          '<div class="alert alert-warning mb-0">Enter a whole number or expanded form like 100 + 20 + 3.</div>';
+      }
+
+      function showExpandedForm(number, originalInput = "") {
         if (number < 0) {
-          result.innerHTML =
+          document.getElementById("result").innerHTML =
             '<div class="alert alert-warning mb-0">Please use a positive number.</div>';
           return;
         }
 
-        const digits = input.split("");
+        const digits = String(number).split("");
         const parts = [];
         const placeValueParts = [];
 
@@ -217,8 +258,13 @@
           placeValueParts.length > 0 ? placeValueParts.join(", ") : "0";
         const words = numberToWords(number);
 
-        result.innerHTML = `
+        const numberLine = originalInput && !/^\d+$/.test(originalInput)
+          ? `<p class="mb-1"><strong>Number:</strong> ${number.toLocaleString()}</p>`
+          : "";
+
+        document.getElementById("result").innerHTML = `
           <div class="alert alert-success mb-0">
+            ${numberLine}
             <p class="mb-1"><strong>Expanded form:</strong> ${expanded}</p>
             <p class="mb-1"><strong>Written as words:</strong> ${words}</p>
             <p class="mb-0"><strong>Written as place value parts:</strong> ${placeForm}</p>
@@ -226,7 +272,7 @@
         `;
       }
 
-      setRandomNumber();
+      convertInput();
     </script>
   </body>
 </html>

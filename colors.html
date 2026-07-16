@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Color Practice</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        min-height: 100vh;
+        background: linear-gradient(135deg, #f7f1ff, #fffbeb);
+      }
+      .app-card {
+        max-width: 560px;
+        border-radius: 24px;
+      }
+      .color-swatch {
+        min-height: 140px;
+        border-radius: 24px;
+        border: 4px solid #ffffff;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+      }
+      #answer {
+        font-size: 1.4rem;
+        text-align: center;
+      }
+      .result-ok {
+        color: #0f5132;
+      }
+      .result-bad {
+        color: #842029;
+      }
+    </style>
+  </head>
+  <body class="d-flex align-items-center justify-content-center py-5">
+    <div class="container px-3">
+      <div class="card shadow-lg app-card mx-auto border-0">
+        <div class="card-body p-4 p-sm-5 text-center">
+          <h1 class="fw-bold mb-3">Color Practice</h1>
+          <p class="mb-3">
+            Read the color and type its name, or guess the color shown.
+          </p>
+
+          <div class="card border-0 shadow-sm p-4 mb-4 bg-white">
+            <p class="text-muted mb-2">Color to identify</p>
+            <div id="colorSwatch" class="color-swatch mb-3"></div>
+            <p id="colorPrompt" class="h5 fw-semibold mb-0"></p>
+          </div>
+
+          <div class="mb-4">
+            <input
+              id="answer"
+              type="text"
+              class="form-control form-control-lg mx-auto text-center"
+              style="max-width: 260px"
+              placeholder="Type a color name"
+              aria-label="Color answer"
+              onkeydown="if (event.key === 'Enter') checkAnswer();"
+            />
+          </div>
+
+          <div class="d-grid gap-2 mb-3">
+            <button class="btn btn-success btn-lg" onclick="checkAnswer()">
+              Check Answer
+            </button>
+            <button
+              class="btn btn-outline-secondary btn-lg"
+              onclick="revealAnswer()"
+            >
+              Reveal Answer
+            </button>
+            <button
+              class="btn btn-outline-primary btn-lg"
+              onclick="nextColor()"
+            >
+              New Color
+            </button>
+          </div>
+
+          <p id="result" class="fs-5 mb-3"></p>
+          <a class="btn btn-link" href="index.html">Back Home</a>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const colors = [
+        { name: "red", value: "#f44336" },
+        { name: "blue", value: "#2196f3" },
+        { name: "green", value: "#4caf50" },
+        { name: "yellow", value: "#ffeb3b" },
+        { name: "purple", value: "#9c27b0" },
+        { name: "orange", value: "#ff9800" },
+        { name: "pink", value: "#e91e63" },
+        { name: "brown", value: "#795548" },
+        { name: "gray", value: "#9e9e9e" },
+      ];
+
+      let currentColor = null;
+      let revealMode = false;
+
+      function randomColor() {
+        currentColor = colors[Math.floor(Math.random() * colors.length)];
+        document.getElementById("colorSwatch").style.background =
+          currentColor.value;
+        document.getElementById("colorPrompt").innerText =
+          "What color is this?";
+        document.getElementById("answer").value = "";
+        document.getElementById("result").innerText = "";
+        revealMode = false;
+      }
+
+      function checkAnswer() {
+        const answer = document
+          .getElementById("answer")
+          .value.trim()
+          .toLowerCase();
+        if (!answer) {
+          showResult("Type a color name first!", false);
+          return;
+        }
+        if (answer === currentColor.name) {
+          showResult("Correct! Nice job!", true);
+        } else {
+          showResult(`Try again!`, false);
+        }
+      }
+
+      function revealAnswer() {
+        document.getElementById("colorPrompt").innerText =
+          `This color is ${currentColor.name}.`;
+        document.getElementById("result").innerText = "";
+        revealMode = true;
+      }
+
+      function nextColor() {
+        randomColor();
+        document.getElementById("answer").focus();
+      }
+
+      function showResult(message, good) {
+        const result = document.getElementById("result");
+        result.innerText = message;
+        result.className = good ? "fs-5 result-ok" : "fs-5 result-bad";
+      }
+
+      randomColor();
+    </script>
+  </body>
+</html>
