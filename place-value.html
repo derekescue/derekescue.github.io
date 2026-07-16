@@ -56,7 +56,9 @@
           </p>
 
           <div class="card p-3 mb-4 question-box">
-            <p class="mb-2 text-muted">What is the value of the underlined digit?</p>
+            <p class="mb-2 text-muted">
+              What is the value of the underlined digit?
+            </p>
             <p id="problem" class="place-digit fw-semibold mb-2"></p>
             <p id="placeLabel" class="text-muted mb-0"></p>
           </div>
@@ -76,17 +78,25 @@
             <button class="btn btn-success btn-lg" onclick="check()">
               Check Answer
             </button>
-            <button class="btn btn-outline-secondary btn-lg" onclick="revealAnswer()">
+            <button
+              class="btn btn-outline-secondary btn-lg"
+              onclick="revealAnswer()"
+            >
               Reveal Answer
             </button>
-            <button class="btn btn-outline-primary btn-lg" onclick="nextProblem()">
+            <button
+              class="btn btn-outline-primary btn-lg"
+              onclick="nextProblem()"
+            >
               New Problem
             </button>
           </div>
 
           <p id="result" class="fs-5 mb-3"></p>
 
-          <div class="keypad d-flex flex-wrap justify-content-center gap-2 mb-4">
+          <div
+            class="keypad d-flex flex-wrap justify-content-center gap-2 mb-4"
+          >
             <button class="btn btn-light" onclick="appendDigit('1')">1</button>
             <button class="btn btn-light" onclick="appendDigit('2')">2</button>
             <button class="btn btn-light" onclick="appendDigit('3')">3</button>
@@ -96,9 +106,16 @@
             <button class="btn btn-light" onclick="appendDigit('7')">7</button>
             <button class="btn btn-light" onclick="appendDigit('8')">8</button>
             <button class="btn btn-light" onclick="appendDigit('9')">9</button>
-            <button class="btn btn-secondary text-white" onclick="clearAnswer()">Clear</button>
+            <button
+              class="btn btn-secondary text-white"
+              onclick="clearAnswer()"
+            >
+              Clear
+            </button>
             <button class="btn btn-light" onclick="appendDigit('0')">0</button>
-            <button class="btn btn-danger text-white" onclick="backspace()">⌫</button>
+            <button class="btn btn-danger text-white" onclick="backspace()">
+              ⌫
+            </button>
           </div>
 
           <a class="btn btn-link" href="index.html">Back Home</a>
@@ -114,7 +131,7 @@
       const placeNames = [
         { name: "ones", value: 1 },
         { name: "tens", value: 10 },
-        { name: "hundreds", value: 100 }
+        { name: "hundreds", value: 100 },
       ];
 
       function setProblem() {
@@ -125,12 +142,14 @@
 
         currentValue = number;
         currentPlace = selectedPlace.name;
-        currentAnswer = Math.floor(number / selectedPlace.value) % 10 * selectedPlace.value;
+        currentAnswer =
+          (Math.floor(number / selectedPlace.value) % 10) * selectedPlace.value;
 
         const highlighted = digits
           .map((digit, index) => {
             const position = digits.length - index;
-            const placeWord = position === 1 ? "ones" : position === 2 ? "tens" : "hundreds";
+            const placeWord =
+              position === 1 ? "ones" : position === 2 ? "tens" : "hundreds";
             if (placeWord === currentPlace) {
               return `<span class="underline">${digit}</span>`;
             }
@@ -139,7 +158,8 @@
           .join(" ");
 
         document.getElementById("problem").innerHTML = highlighted;
-        document.getElementById("placeLabel").innerText = `The underlined digit is in the ${currentPlace} place.`;
+        document.getElementById("placeLabel").innerText =
+          `The underlined digit is in the ${currentPlace} place.`;
         document.getElementById("answer").value = "";
         document.getElementById("result").innerText = "";
       }

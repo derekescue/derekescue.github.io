@@ -55,7 +55,7 @@
               placeholder="Type next letter"
               aria-label="Next alphabet letter"
               maxlength="1"
-              onkeydown="if (event.key === 'Enter') checkAnswer()"
+              onkeydown="if (event.key === 'Enter') checkAnswer();"
             />
           </div>
 
@@ -63,16 +63,26 @@
             <button class="btn btn-success btn-lg" onclick="checkAnswer()">
               Check Answer
             </button>
-            <button class="btn btn-outline-primary btn-lg" onclick="nextLetter()">
+            <button
+              class="btn btn-outline-primary btn-lg"
+              onclick="nextLetter()"
+            >
               New Letter
             </button>
-            <button class="btn btn-outline-secondary btn-lg" onclick="showAlphabet()">
+            <button
+              class="btn btn-outline-secondary btn-lg"
+              onclick="showAlphabet()"
+            >
               Show Alphabet
             </button>
           </div>
 
           <p id="result" class="fs-5 mb-3"></p>
-          <div id="alphabetList" class="text-muted mb-3" style="font-size: 1.05rem; word-break: break-word;"></div>
+          <div
+            id="alphabetList"
+            class="text-muted mb-3"
+            style="font-size: 1.05rem; word-break: break-word"
+          ></div>
           <a class="btn btn-link" href="index.html">Back Home</a>
         </div>
       </div>
@@ -90,7 +100,10 @@
       }
 
       function checkAnswer() {
-        const answer = document.getElementById("answer").value.trim().toUpperCase();
+        const answer = document
+          .getElementById("answer")
+          .value.trim()
+          .toUpperCase();
         if (!answer) {
           showResult("Type a letter first!", false);
           return;

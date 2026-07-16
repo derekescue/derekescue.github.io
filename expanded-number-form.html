@@ -29,12 +29,15 @@
         <div class="card-body p-4 p-sm-5 text-center">
           <h1 class="fw-bold mb-3">Expanded Number Form</h1>
           <p class="mb-4">
-            Type a number or an expanded form expression to convert between them.
+            Type a number or an expanded form expression to convert between
+            them.
           </p>
 
           <div class="row g-3 justify-content-center mb-4">
             <div class="col-12 col-sm-7">
-              <label class="form-label fw-semibold">Enter a number or expanded form</label>
+              <label class="form-label fw-semibold"
+                >Enter a number or expanded form</label
+              >
               <input
                 id="numberInput"
                 type="text"
@@ -42,14 +45,11 @@
                 value=""
                 placeholder="e.g. 123 or 100 + 20 + 3"
                 aria-label="Number or expanded form"
-                onkeydown="if (event.key === 'Enter') convertInput()"
+                onkeydown="if (event.key === 'Enter') convertInput();"
               />
             </div>
             <div class="col-12 col-sm-5 d-grid gap-2">
-              <button
-                class="btn btn-success btn-lg"
-                onclick="convertInput()"
-              >
+              <button class="btn btn-success btn-lg" onclick="convertInput()">
                 Convert
               </button>
               <button
@@ -258,9 +258,10 @@
           placeValueParts.length > 0 ? placeValueParts.join(", ") : "0";
         const words = numberToWords(number);
 
-        const numberLine = originalInput && !/^\d+$/.test(originalInput)
-          ? `<p class="mb-1"><strong>Number:</strong> ${number.toLocaleString()}</p>`
-          : "";
+        const numberLine =
+          originalInput && !/^\d+$/.test(originalInput)
+            ? `<p class="mb-1"><strong>Number:</strong> ${number.toLocaleString()}</p>`
+            : "";
 
         document.getElementById("result").innerHTML = `
           <div class="alert alert-success mb-0">

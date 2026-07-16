@@ -39,7 +39,8 @@
         <div class="card-body p-4 p-sm-5 text-center">
           <h1 class="fw-bold mb-3">Fractions Practice</h1>
           <p class="mb-3">
-            Read the clue and type the fraction in the form <strong>n/d</strong>.
+            Read the clue and type the fraction in the form
+            <strong>n/d</strong>.
           </p>
 
           <div class="mb-4">
@@ -64,10 +65,16 @@
             <button class="btn btn-success btn-lg" onclick="checkFraction()">
               Check Answer
             </button>
-            <button class="btn btn-outline-secondary btn-lg" onclick="revealFraction()">
+            <button
+              class="btn btn-outline-secondary btn-lg"
+              onclick="revealFraction()"
+            >
               Reveal Answer
             </button>
-            <button class="btn btn-outline-primary btn-lg" onclick="nextFraction()">
+            <button
+              class="btn btn-outline-primary btn-lg"
+              onclick="nextFraction()"
+            >
               New Question
             </button>
           </div>
@@ -121,7 +128,8 @@
       let currentFraction = null;
 
       function setFraction() {
-        currentFraction = fractions[Math.floor(Math.random() * fractions.length)];
+        currentFraction =
+          fractions[Math.floor(Math.random() * fractions.length)];
         document.getElementById("clue").innerText = currentFraction.clue;
         document.getElementById("answer").value = "";
         document.getElementById("result").innerText = "";
@@ -145,7 +153,10 @@
       function isSameFraction(user, correct) {
         const reducedUser = reduceFraction(user);
         const reducedCorrect = reduceFraction(correct);
-        return reducedUser.n === reducedCorrect.n && reducedUser.d === reducedCorrect.d;
+        return (
+          reducedUser.n === reducedCorrect.n &&
+          reducedUser.d === reducedCorrect.d
+        );
       }
 
       function checkFraction() {
